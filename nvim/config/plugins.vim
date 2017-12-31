@@ -6,8 +6,11 @@
 "     Colorizer
 "     Comfortable Motion
 "     Deoplete
+"     DeleteHiddenBuffers
 "     Easy Motion
 "     FZF
+"     Goyo
+"     Incsearch
 "     Language Server
 "     Markdown
 "     Multiple Cursors
@@ -35,7 +38,7 @@ let g:ale_lint_on_enter = 0
 "   ~lint on save
 let g:ale_lint_on_save = 0
 "   ~always show column
-let g:ale_sign_column_always=1
+let g:ale_sign_column_always = 1
 "   ~change default symbols
 let g:ale_sign_error = '•'
 let g:ale_sign_warning = '•'
@@ -61,9 +64,9 @@ let g:ale_set_highlights = 0
 
 "   __ | Buftabline
 "   ~enable modified flag
-let g:buftabline_indicators=1
+let g:buftabline_indicators = 1
 "   ~show ordinal numbers (left to right)
-let g:buftabline_numbers=2
+let g:buftabline_numbers = 2
 "   ~use hotkeys to jump to buffers
 nmap <leader>1 <Plug>BufTabLine.Go(1)
 nmap <leader>2 <Plug>BufTabLine.Go(2)
@@ -92,10 +95,10 @@ inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ deoplete#mappings#manual_complete()
-function! s:check_back_space() abort "{{{
+function! s:check_back_space()
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
+endfunction
 
 "   ~use tab and shift tab to cycle through completion menu
 "inoremap <expr><TAB> pumvisible() ? "\<c-n>" : "\<TAB>"
@@ -125,9 +128,14 @@ call deoplete#custom#set('LanguageClient', 'mark', '')
 "                \ ]
 
 
+"   __ | DeleteHiddenBuffers
+"   ~map command to relevant key
+nnoremap <C-W>d :DeleteHiddenBuffers<cr>
+
+
 "   __ | Easy Motion
 "   ~easy motion fuzzy finder
-function! s:config_easyfuzzymotion(...) abort
+function! s:config_easyfuzzymotion(...)
   return extend(copy({
         \   'converters': [incsearch#config#fuzzyword#converter()],
         \   'modules': [incsearch#config#easymotion#module()],
@@ -165,6 +173,11 @@ imap <c-f><c-k> <plug>(fzf-complete-word)
 imap <c-f><c-f> <plug>(fzf-complete-path)
 imap <c-f><c-j> <plug>(fzf-complete-file-ag)
 imap <c-f><c-l> <plug>(fzf-complete-line)
+
+
+"   __ | Goyo
+"   ~better default mapping
+nnoremap <C-o> :Goyo<cr>
 
 
 "   __ | Incsearch

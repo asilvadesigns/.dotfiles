@@ -13,7 +13,7 @@
 "   __ | ColorScheme
 "   https://speakerdeck.com/cocopon/creating-your-lovely-color-scheme
 if (has("nvim"))
-  let $NVIM_T___ENABLE_TRUE_COLOR = 1
+  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 endif
 
 if (has("termguicolors"))
@@ -72,8 +72,9 @@ function! LinterStatus() abort
   let l:all_errors = l:counts.error + l:counts.style_error
   let l:all_non_errors = l:counts.total - l:all_errors
 
+  "\   ' %d  %d  ',
   return printf(
-        \   ' %d  %d  ',
+        \   ' %d  %d  ',
         \   all_errors,
         \   all_non_errors
         \)
